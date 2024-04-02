@@ -1,7 +1,7 @@
 import axios from "axios";
 const API_BASE = process.env.REACT_APP_API_BASE;
-const COURSES_API = "https://kanbas-node-server-app-y7tx.onrender.com/api/courses";
-const ASSIGNMENTS_API = "https://kanbas-node-server-app-y7tx.onrender.com/api/assignments";
+const COURSES_API = `${API_BASE}/api/courses`;
+const ASSIGNMENTS_API = `${API_BASE}/api/assignments`;
 
 export const updateAssignment = async (assignment:any) => {
   const response = await axios.
