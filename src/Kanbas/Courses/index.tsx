@@ -1,4 +1,3 @@
-import { courses } from "../../Kanbas/Database";
 import { Navigate, Routes, Route, useParams } from "react-router-dom";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { Link,useLocation } from "react-router-dom";
@@ -8,20 +7,29 @@ import { FaGlasses } from "react-icons/fa";
 import Modules from "./Modules";
 import Home from "./Home";
 import Assignments from "./Assignments";
-import path from "path";
 import AssignmentEditor from "./Assignments/Editor";
-import * as db from "../../Kanbas/Database";
 import Grades from "./Grades";
 import MyWebPage from "./Home/MyWebPage";
 import 'bootstrap/dist/js/bootstrap.min.js';
 import { KanbasState } from "../store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
 
-function Courses( {courses }: { courses: any[]; }) {
+function Courses() {
     const { courseId } = useParams();
-    const course = courses.find((course) => course._id === courseId);
+    const COURSES_API = "https://kanbas-node-server-app-y7tx.onrender.com/api/courses"
+    const [course, setCourse] = useState<any>({ _id: "" });
+    const findCourseById = async (courseId?: string) => {
+      const response = await axios.get(
+        `${COURSES_API}/${courseId}`
+      );
+      setCourse(response.data);
+    };
+    useEffect(() => {
+      findCourseById(courseId);
+    }, [courseId]);
     const { pathname } = useLocation();
 
     var pathValues = pathname.split('/');

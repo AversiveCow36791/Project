@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import * as testvariable from "react-icons/fa";
 import {
@@ -6,15 +6,24 @@ import {
     deleteAssignment,
     updateAssignment,
     setAssignment,
+    setAssignments,
   } from "../assignmentsReducer";
 import { useDispatch,useSelector } from "react-redux";
-import * as db from "../../../Database";
 import { KanbasState } from "../../../store";
+import * as client from "../assignmentServices";
 
 function AssignmentEditor() {
     const { assignmentId} = useParams();
     const { courseId } = useParams();
     const randomId = new Date().getTime().toString();
+
+    useEffect(() => {
+        client.findAssignmentsForCourse(courseId)
+          .then((assignments) =>
+            dispatch(setAssignments(assignments))
+        );
+      }, [courseId]);
+
     const initialState = {
         _id: randomId,
         title: "New Assignment 123",
@@ -29,6 +38,17 @@ function AssignmentEditor() {
     const assignmentState = assignments.find((assignment) => assignment._id === assignmentId);
     const [assignment, setAssignment] = useState(assignmentState || initialState);
 
+    const handleUpdateAssignment = async () => {
+        const status = await client.updateAssignment(assignment);
+        dispatch(updateAssignment(assignment));
+    };
+
+    const handleAddAssignment = async () => {
+        const status = await client.createAssignment(courseId,assignment);
+        dispatch(addAssignment(assignment));
+    };
+
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleSave = () => {
@@ -40,9 +60,10 @@ function AssignmentEditor() {
         // }
 
         if (assignmentState === undefined) {
-            dispatch(addAssignment(assignment));
+            handleAddAssignment();
         } else {
-            dispatch(updateAssignment(assignment));
+            // dispatch(updateAssignment(assignment));
+            handleUpdateAssignment();
         }
 
         navigate(`/Kanbas/Courses/${courseId}/Assignments`);

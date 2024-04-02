@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./index.css";
-import { modules } from "../../Database";
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle, FaPlus } from "react-icons/fa";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -10,11 +9,37 @@ import {
   deleteModule,
   updateModule,
   setModule,
+  setModules,
 } from "./reducer";
 import { KanbasState } from "../../store";
+import * as client from "./services";
 
 function ModuleList() {
   const { courseId } = useParams();
+  useEffect(() => {
+    client.findModulesForCourse(courseId)
+      .then((modules) =>
+        dispatch(setModules(modules))
+    );
+  }, [courseId]);
+
+  const handleDeleteModule = (moduleId: string) => {
+    client.deleteModule(moduleId).then((status) => {
+      dispatch(deleteModule(moduleId));
+    });
+  };
+
+  const handleAddModule = () => {
+    client.createModule(courseId, module).then((module) => {
+      dispatch(addModule(module));
+    });
+  };
+
+  const handleUpdateModule = async () => {
+    const status = await client.updateModule(module);
+    dispatch(updateModule(module));
+  };
+
   const moduleList = useSelector((state: KanbasState) => 
     state.modulesReducer.modules);
   const module = useSelector((state: KanbasState) => 
@@ -48,10 +73,10 @@ function ModuleList() {
           <div className="col">
             <div className="row">
             <div className="col">
-            <button className="btn btn-success rounded mx-1 py-1" onClick={() => dispatch(addModule({ ...module, course: courseId }))}>
+            <button className="btn btn-success rounded mx-1 py-1" onClick={handleAddModule}>
               Add
             </button>
-            <button className="btn btn-danger rounded mx-1 py-1" onClick={() => dispatch(updateModule(module))}>
+            <button className="btn btn-danger rounded mx-1 py-1" onClick={handleUpdateModule}>
               Update
             </button>
             </div>
@@ -85,7 +110,7 @@ function ModuleList() {
             </button>
 
             <button className="btn btn-danger rounded mx-1 py-0"
-              onClick={() => dispatch(deleteModule(module._id))}>
+              onClick={() => handleDeleteModule(module._id)}>
               Delete
             </button>
 
@@ -95,7 +120,7 @@ function ModuleList() {
               </span>
             </div>
 
-            {selectedModule._id === module._id && module.lessons?.map((lesson: { _id: string, name: string, description: string }) => (
+            {selectedModule?._id === module._id && module.lessons?.map((lesson: { _id: string, name: string, description: string }) => (
               <ul className="list-group">
                   <li className="list-group-item p-0 rounded-0">
                     <FaEllipsisV className="me-2" />

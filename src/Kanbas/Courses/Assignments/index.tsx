@@ -1,7 +1,6 @@
 import React from "react";
 import { FaCheckCircle, FaEllipsisV, FaPenSquare, FaPencilAlt, FaPencilRuler, FaPlus, FaPlusCircle, FaRegFileWord } from "react-icons/fa";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { assignments } from "../../Database";
 import "./index.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,13 +9,28 @@ import {
   deleteAssignment,
   updateAssignment,
   setAssignment,
+  setAssignments,
 } from "./assignmentsReducer";
 import { KanbasState } from "../../store";
-import { useState } from "react";
+import { useEffect,useState } from "react";
+import * as client from "./assignmentServices";
 
 
 function Assignments() {
   const { courseId } = useParams();
+  useEffect(() => {
+    client.findAssignmentsForCourse(courseId)
+      .then((assignments) =>
+        dispatch(setAssignments(assignments))
+    );
+  }, [courseId]);
+
+  const handleDeleteAssignment = (assignmentId: string) => {
+    client.deleteAssignment(assignmentId).then((status) => {
+      dispatch(deleteAssignment(assignmentId));
+    });
+  };
+
   const assignmentList = useSelector((state: KanbasState) =>
     state.assignmentsReducer.assignments)
     .filter(
@@ -26,13 +40,14 @@ function Assignments() {
   const randomId = new Date().getTime().toString();
   const navigate = useNavigate();
 
+
   const [assignmentToDelete, setAssignmentToDelete] = useState(null);
 
   const handleShowDelete = (assignmentId: string) => {
     const confirm = window.confirm("Are you sure you want to delete this assignment?");
 
     if (confirm) {
-      dispatch(deleteAssignment(assignmentId));
+      handleDeleteAssignment(assignmentId);
     }
 
   };
