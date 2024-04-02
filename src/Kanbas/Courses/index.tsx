@@ -15,7 +15,7 @@ import { KanbasState } from "../store";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-const API_BASE = process.env.REACT_APP_API_BASE;
+const API_BASE = process.env.REACT_APP_API_BASE || "http://localhost:4000";
 
 function Courses() {
     const { courseId } = useParams();

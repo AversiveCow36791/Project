@@ -8,7 +8,8 @@ import store from "./store";
 import { Provider } from "react-redux";
 import Assignments from "./Courses/Assignments";
 
-const API_BASE = process.env.REACT_APP_API_BASE;
+const API_BASE = process.env.REACT_APP_API_BASE || "http://localhost:4000";
+
 
 function Kanbas() {
   const [courses, setCourses] = useState<any[]>([]);
@@ -17,6 +18,8 @@ function Kanbas() {
     startDate: "2023-09-10", endDate: "2023-12-15", image: "volodymyr-hryshchenko-inI8GnmS190-unsplash.jpg"
   });
   const COURSES_API = `${API_BASE}/api/courses`
+  console.log(COURSES_API);
+  console.log(API_BASE);
   const findAllCourses = async () => {
     const response = await axios.get(COURSES_API);
     setCourses(response.data);
