@@ -1,0 +1,25 @@
+[{
+    "id":1, "course": "MA2330", "availableDate": "2021-01-01", "dueDate": "2021-01-15", "title": "Quiz 1", "published": true,"points":100 ,"questions": [
+        {"id": 1, "question": "What is the capital of France?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 0},
+        {"id": 2, "question": "What is the capital of Germany?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 2},
+        {"id": 3, "question": "What is the capital of Spain?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 3}
+    ], "numOfQuestions": 3, "status": "Closed"
+},{
+    "id":2, "course": "MA2330", "availableDate": "2021-01-01", "dueDate": "2021-01-15", "title": "Quiz 2", "published": false,"points":100 ,"questions": [
+        {"id": 1, "question": "What is the capital of France?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 0},
+        {"id": 2, "question": "What is the capital of Germany?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 2},
+        {"id": 3, "question": "What is the capital of Spain?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 3}
+    ], "numOfQuestions": 3, "status": "Available"
+},{
+    "id":3, "course": "MA2330", "availableDate": "2021-01-01", "dueDate": "2021-01-15", "title": "Quiz 3", "published": true,"points":100 ,"questions": [
+        {"id": 1, "question": "What is the capital of France?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 0},
+        {"id": 2, "question": "What is the capital of Germany?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 2},
+        {"id": 3, "question": "What is the capital of Spain?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 3}
+    ], "numOfQuestions": 3, "status":"Not available until"
+},{
+    "id":4, "course": "MA2330", "availableDate": "2021-01-01", "dueDate": "2021-01-15", "title": "Quiz 4", "published": true,"points":100 ,"questions": [
+        {"id": 1, "question": "What is the capital of France?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 0},
+        {"id": 2, "question": "What is the capital of Germany?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 2},
+        {"id": 3, "question": "What is the capital of Spain?", "options": ["Paris", "London", "Berlin", "Madrid"], "answer": 3}
+    ], "numOfQuestions": 3, "status":"Not available until"
+}]

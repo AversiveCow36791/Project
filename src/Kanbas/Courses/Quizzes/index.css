@@ -1,0 +1,11 @@
+.overlap {
+    display: inline;
+    position: center;
+    margin-right: 14px;
+}
+
+.circle,.slash {
+    position: absolute;
+    top:40%;
+    color:red
+}

@@ -15,6 +15,7 @@ import { KanbasState } from "../store";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import Quizzes from "./Quizzes";
 const API_BASE = process.env.REACT_APP_API_BASE || "http://localhost:4000";
 
 function Courses() {
@@ -37,7 +38,7 @@ function Courses() {
 
     const assignmentList = useSelector((state: KanbasState) => 
     state.assignmentsReducer.assignments);
-    if(pathValues.length == 6){
+    if(pathValues.length == 6 && pathValues[4] === "Assignments"){
     //   const assignmentList = db.assignments.filter(
     //     (assignment) => assignment._id === pathValues[5]);
     //     breadcrumb = "Assignments > " + assignmentList.map((assignment) => assignment.title);
@@ -45,6 +46,11 @@ function Courses() {
     const assignment = assignmentList.find((assignment) => assignment._id === pathValues[5]);
     breadcrumb = "Assignments > " + (assignment?.title || "New Assignment");
     }
+
+    if (pathValues.length == 6 && pathValues[4] === "Quizzes") {
+      breadcrumb = "Quizzes > " + pathValues[5];
+    }
+
 
     return (
 
@@ -85,6 +91,7 @@ function Courses() {
             <Route path="Assignments" element={<Assignments/>} />
             <Route path="Assignments/:assignmentId" element={<AssignmentEditor/>} />
             <Route path="Grades" element={<Grades />} />
+            <Route path="Quizzes" element={<Quizzes/>} />
           </Routes>
         </div>
       </div>
