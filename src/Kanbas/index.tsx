@@ -7,6 +7,7 @@ import axios from "axios";
 import store from "./store";
 import { Provider } from "react-redux";
 import Assignments from "./Courses/Assignments";
+import Account from "./Account";
 
 const API_BASE = process.env.REACT_APP_API_BASE || "http://localhost:4000";
 
@@ -64,8 +65,8 @@ function Kanbas() {
        </div>
        <div style={{ flexGrow: 1 }}>
          <Routes>
+         <Route path="/Account/*" element = {<Account/>}></Route>
           <Route path="/" element={<Navigate to="Dashboard" />} />
-          <Route path="Account" element = {<h1>Account</h1>}></Route>
           <Route path="Dashboard" element = { <Dashboard
               courses={courses}
               course={course}
