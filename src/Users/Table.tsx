@@ -89,10 +89,11 @@ export default function UserTable() {
         <tbody>
         <tr>
             <td>
-              <input value={user.password} onChange={(e) =>
-                setUser({ ...user, password: e.target.value })}/>
+
               <input value={user.username} onChange={(e) =>
                 setUser({ ...user, username: e.target.value })}/>
+              <input type="password" value={user.password} onChange={(e) =>
+                setUser({ ...user, password: e.target.value })} className="ms-1"/>
             </td>
             <td>
               <input value={user.firstName} onChange={(e) =>
