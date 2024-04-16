@@ -64,10 +64,12 @@ export default function Profile() {
           </div>
             <button onClick={save} className="btn btn-primary w-100 mb-2"> Save </button>
             <button onClick={signout} className="btn btn-danger w-100 mb-2"> Signout </button>
-            <Link to="/Kanbas/Account/Admin/Users"
-            className="btn btn-warning w-100">
+
+            {profile.role === "ADMIN" && (
+              <Link to="/Kanbas/Account/Admin/Users" className="btn btn-warning w-100">
                 Users
-            </Link>
+              </Link>
+            )}
           </div> 
         </div>
       )}
