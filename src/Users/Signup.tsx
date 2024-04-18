@@ -15,7 +15,7 @@ export default function Signup() {
   };
   return (
     <div>
-      <h1>AccountSignup</h1>
+      <h1>Account Signup</h1>
       <span style={{color:"red"}}>{error && <div>{error}</div>}</span>
       Username:
       <input value={user.username} onChange={(e) => setUser({
