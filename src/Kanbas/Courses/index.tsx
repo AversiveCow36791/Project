@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Quizzes from "./Quizzes";
+import QuizDetails from "./Quizzes/Details";
 const API_BASE = process.env.REACT_APP_API_BASE || "http://localhost:4000";
 
 function Courses() {
@@ -92,6 +93,7 @@ function Courses() {
             <Route path="Assignments/:assignmentId" element={<AssignmentEditor/>} />
             <Route path="Grades" element={<Grades />} />
             <Route path="Quizzes" element={<Quizzes/>} />
+            <Route path="Quizzes/:quizId" element={<QuizDetails/>} />
           </Routes>
         </div>
       </div>
