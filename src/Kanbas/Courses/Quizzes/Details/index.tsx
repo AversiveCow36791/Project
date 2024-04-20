@@ -6,7 +6,7 @@ function QuizDetails() {
     const { quizId } = useParams();
     const { courseId } = useParams();
     const randomId = new Date().getTime().toString();
-    
+
     return (
         <>
         <div className="row flex-grow-1">
