@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { quizzes } from '../../Database';
 import { Link } from 'react-router-dom';
 import "./index.css";
+import QuizList from './List';
 
 function Quizzes() {
 const { courseId } = useParams();
@@ -91,9 +92,8 @@ const quizList = quizzes.filter((quiz) => quiz.course === courseId);
         </ul>
 
 
-
-    </>
-    )
+    </> 
+  )
 };
 
 export default Quizzes;
