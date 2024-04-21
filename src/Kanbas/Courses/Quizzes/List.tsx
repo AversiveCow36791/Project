@@ -13,6 +13,7 @@ import { KanbasState } from "../../store";
 import { FaCheckCircle, FaPlusCircle, FaEllipsisV, FaPlus, FaRocket, FaSlash, FaRegCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { CgUnavailable } from "react-icons/cg";
 
 function QuizList() {
 const { courseId } = useParams();
@@ -121,10 +122,7 @@ const navigate = useNavigate();
                 status = "Closed"
             }
             console.log(status);
-            let pub = <div className="overlap">
-                <FaRegCircle className="circle" />
-                <FaSlash className="slash" />
-            </div>;
+            let pub = <CgUnavailable className="text-danger"/>
             if (quiz.published === true) {
               pub = <FaCheckCircle className="text-success" />
             }

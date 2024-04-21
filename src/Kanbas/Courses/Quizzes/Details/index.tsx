@@ -5,6 +5,7 @@ import { KanbasState } from '../../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import * as client from '../services';
 import { setQuizzes } from '../reducer';
+import { CgUnavailable } from "react-icons/cg";
 
 function QuizDetails() {
     const { quizId } = useParams();
@@ -46,6 +47,23 @@ function QuizDetails() {
     const quizState = quizzes.find((quiz) => quiz._id === quizId);
     const [quiz, setQuiz] = useState(quizState || initialState);
 
+    const buttonClass = quiz.published ? 'btn btn-success' : 'btn btn-danger';
+
+    let publishedContent;
+    if (quiz.published === true) {
+      publishedContent = (
+        <>
+          <testvariable.FaCheckCircle/> Published
+        </>
+      );
+    } else {
+      publishedContent = (
+        <>
+            <CgUnavailable/> Unpublished
+        </>
+      );
+    }
+
 
     return (
         <>
@@ -54,7 +72,7 @@ function QuizDetails() {
                 </div>
                 <div className="col flex-grow-2 mb-1" >
                     <span className="float-end">
-                    <button className="btn btn-success"><testvariable.FaCheckCircle/> Published</button>
+                    <button className={buttonClass}>{publishedContent}</button>
                     <button className="btn btn-outline-dark ms-1" style={{backgroundColor:"lightgray"}}>Preview</button>
                     <button className="btn btn-outline-dark ms-1" style={{backgroundColor:"lightgray"}}><testvariable.FaPencilAlt/> Edit</button>
                     <div className="dropdown" style={{display: "inline"}}>
