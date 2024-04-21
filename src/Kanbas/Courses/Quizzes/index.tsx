@@ -15,7 +15,8 @@ const quizList = quizzes.filter((quiz) => quiz.course === courseId);
 
     return (
     <>
-        <div className='row flex-grow-1'>
+    <QuizList />
+        {/* <div className='row flex-grow-1'>
             <div className="col-5 flex-grow-1">
                 <input id="Quiz" className="form-control w-50" placeholder="Search for Quizzes"/>
             </div>
@@ -90,7 +91,7 @@ const quizList = quizzes.filter((quiz) => quiz.course === courseId);
 
         </li>
         </ul>
-
+ */}
 
     </> 
   )
