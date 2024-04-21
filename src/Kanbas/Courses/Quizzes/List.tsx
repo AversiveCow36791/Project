@@ -133,7 +133,7 @@ const navigate = useNavigate();
               <li className="list-group-item rounded-0 d-flex align-items-center">
                 <FaRocket className="mx-2 green" />
                 <div className="assign pt-2">
-                  <Link to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz.id}`} className="a-none-black">
+                  <Link to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`} className="a-none-black">
                     {quiz.title}
                   </Link>
                   <p className="small">
