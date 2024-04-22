@@ -15,18 +15,18 @@ function QuizDetails() {
 
     const initialState = {
         title: 'New Quiz',
-        quizType: '',
+        QuizType: '',
         points: '',
         assignmentGroup: '',
-        shuffleAnswers: '',
+        ShuffleAnswers: '',
         timeLimit: '',
-        multipleAttempts: '',
+        MultipleAttempts: '',
         viewResponses: '',
-        showCorrectAnswers: '',
-        oneQuestionAtATime: '',
+        ShowCorrectAnswers: '',
+        OneQuestionAtATime: '',
         requireRespondusLockDownBrowser: '',
         requiredToViewQuizeResults: '',
-        webcamRequired: '',
+        webCamRequired: '',
         lockQuestionsAfterAnswering: '',
         due: '',
         for: '',
@@ -98,7 +98,7 @@ function QuizDetails() {
                         <span className='float-end fw-bold'>Quiz Type</span>
                     </div>
                     <div className="col">
-                        <span>{quiz.quizType}</span>
+                        <span>{quiz.QuizType}</span>
                     </div>
                 </div>
                 <div className="row">
@@ -122,7 +122,7 @@ function QuizDetails() {
                         <span className='float-end fw-bold'>Shuffle Answers</span>
                     </div>
                     <div className="col">
-                        <span>{quiz.shuffleAnswers}</span>
+                        <span>{quiz.ShuffleAnswers}</span>
                     </div>
                 </div>
                 <div className="row">
@@ -138,7 +138,7 @@ function QuizDetails() {
                         <span className='float-end fw-bold'>Multiple Attempts</span>
                     </div>
                     <div className="col">
-                        <span>{quiz.multipleAttempts}</span>
+                        <span>{quiz.MultipleAttempts}</span>
                     </div>
                 </div>
                 <div className="row">
@@ -154,7 +154,7 @@ function QuizDetails() {
                         <span className='float-end fw-bold'>Show Correct Answers</span>
                     </div>
                     <div className="col">
-                        <span>{quiz.showCorrectAnswers}</span>
+                        <span>{quiz.ShowCorrectAnswers}</span>
                     </div>
                 </div>
 
@@ -163,7 +163,7 @@ function QuizDetails() {
                         <span className='float-end fw-bold'>One Question at a Time</span>
                     </div>
                     <div className="col">
-                        <span>{quiz.oneQuestionAtATime}</span>
+                        <span>{quiz.OneQuestionAtATime}</span>
                     </div>
                 </div>
 
@@ -191,7 +191,7 @@ function QuizDetails() {
                         <span className='float-end fw-bold'>Webcam Required</span>
                     </div>
                     <div className='col'>
-                        <span>{quiz.webcamRequired}</span>
+                        <span>{quiz.webCamRequired}</span>
                     </div>
                 </div>
 
@@ -200,7 +200,7 @@ function QuizDetails() {
                         <span className='float-end fw-bold'>Lock Questions After Answering</span>
                     </div>
                     <div className='col'>
-                        <span>{quiz.lockQuestionsAfterAnswering}</span>
+                        <span>{quiz.LockQuestionsAfterAnswering}</span>
                     </div>
                 </div>
             </div>
@@ -214,7 +214,7 @@ function QuizDetails() {
 
             <div className='row'>
             <div className='col-2'>{quiz.dueDate}</div>
-            <div className='col-2'>{quiz.for}</div>
+            <div className='col-2'>{quiz.assignmentGroup}</div>
             <div className='col-2'>{quiz.availableDate}</div>
             <div className='col-2'>{quiz.dueDate}</div>
             </div>
