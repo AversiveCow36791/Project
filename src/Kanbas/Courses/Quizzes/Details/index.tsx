@@ -23,6 +23,10 @@ function QuizDetails() {
     setProfile(account);
   };
 
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
 
     const initialState = {
         title: 'New Quiz',
