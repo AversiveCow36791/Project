@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import * as db from "../Database";
 import { FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import * as ac from "../../Users/client";
+import { useEffect } from "react";
 
 function Dashboard({ courses, course, setCourse, addNewCourse,
   deleteCourse, updateCourse }: {
@@ -9,7 +12,17 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
   addNewCourse: () => void; deleteCourse: (course: any) => void;
   updateCourse: () => void; }) {
 
+    const [profile, setProfile] = useState({ username: "", password: "", 
+    firstName: "", lastName: "", dob: "", email: "", role: "USER" });
+    const navigate = useNavigate();
+    const fetchProfile = async () => {
+    const account = await ac.profile();
+    setProfile(account);
+  };
 
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
     return (
         <div className="p-4">
@@ -44,9 +57,9 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
         Update
         </button>
 
-
+        
         <h2 className="ps-2">Published Courses ({courses.length})</h2> <hr />
-        <div className="row flex-wrap pt-0" style= {{marginBottom: 30}}>
+        {profile.role !== 'USER' && ( <div className="row flex-wrap pt-0" style= {{marginBottom: 30}}>
           <div className="row row-cols-1 row-cols-md-5 g-4 mt-0">
             {courses.map((course) => (
             <div key={course._id} className="col" style= {{width: 300 }} >
@@ -78,7 +91,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
             </div>
             ))}
         </div>
-    </div>
+    </div>)}
     </div>
     );
 }
