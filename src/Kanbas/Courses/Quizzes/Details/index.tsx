@@ -6,12 +6,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as client from '../services';
 import { setQuizzes } from '../reducer';
 import { CgUnavailable } from "react-icons/cg";
+import * as ac from "../../../../Users/client";
 
 function QuizDetails() {
     const { quizId } = useParams();
     const { courseId } = useParams();
     const randomId = new Date().getTime().toString();
     const dispatch = useDispatch();
+
+
+    const [profile, setProfile] = useState({ username: "", password: "", 
+    firstName: "", lastName: "", dob: "", email: "", role: "USER" });
+    const navigate = useNavigate();
+    const fetchProfile = async () => {
+    const account = await ac.profile();
+    setProfile(account);
+  };
+
 
     const initialState = {
         title: 'New Quiz',
@@ -73,8 +84,10 @@ function QuizDetails() {
                 <div className="col flex-grow-2 mb-1" >
                     <span className="float-end">
                     <button className={buttonClass}>{publishedContent}</button>
-                    <button className="btn btn-outline-dark ms-1" style={{backgroundColor:"lightgray"}}>Preview</button>
-                    <button className="btn btn-outline-dark ms-1" style={{backgroundColor:"lightgray"}}><testvariable.FaPencilAlt/> Edit</button>
+                    {profile.role === 'FACULTY' && (
+                    <button className="btn btn-outline-dark ms-1" style={{backgroundColor:"lightgray"}}>Preview</button>)}
+                    {profile.role === 'FACULTY' && (
+                    <button className="btn btn-outline-dark ms-1" style={{backgroundColor:"lightgray"}}><testvariable.FaPencilAlt/> Edit</button>)}
                     <div className="dropdown" style={{display: "inline"}}>
                         <button type="button" className="btn btn-outline-dark rounded ms-1" style={{backgroundColor:"lightgray"}} data-bs-toggle="dropdown">
                             <testvariable.FaEllipsisV/>
