@@ -51,6 +51,11 @@ const navigate = useNavigate();
     dispatch(updateQuiz(selectedQuiz));
   };
 
+  const handlePublishQuiz = async (quizId: string) => {
+    await client.updateQuiz({ ...selectedQuiz, published: !selectedQuiz.published });
+    dispatch(updateQuiz({ ...selectedQuiz, published: !selectedQuiz.published }));
+  };
+
   return (
     <div>
       <div className='row flex-grow-1'>
@@ -59,14 +64,14 @@ const navigate = useNavigate();
             </div>
             <div className="col flex-grow-2">
               <span className="float-end">
-                <button type="button" className="btn btn-danger rounded mx-1" onClick={() => navigate(`/Kanbas/Courses/${courseId}/Quizzes/`)}><FaPlus/> Quiz</button>
+                <button type="button" className="btn btn-danger rounded mx-1" onClick={handleAddQuiz}><FaPlus/> Quiz</button>
                 <button type="button" className="btn btn-outline-dark rounded" style={{backgroundColor:"rgb(171, 168, 165)"}} data-bs-toggle="dropdown">
                     <FaEllipsisV/>
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <li><Link className="dropdown-item" to="#">Edit</Link></li>
-                      <li><Link className="dropdown-item" to="#">Delete</Link></li>
-                        <li><Link className="dropdown-item" to="#">Publish</Link></li>
+                      <li><button className="dropdown-item" onClick={() => handleDeleteQuiz(selectedQuiz._id)}>Delete</button></li>
+                        <li><button className="dropdown-item" onClick={() => handlePublishQuiz(selectedQuiz._id)} >{selectedQuiz.published ? 'Unpublish' : 'Publish'}</button></li>
                         <li><Link className="dropdown-item" to="#">Copy</Link></li>
                         <li><Link className="dropdown-item" to="#">Sort</Link></li>
                     </ul>
@@ -128,7 +133,7 @@ const navigate = useNavigate();
             }
 
             return (
-              <li className="list-group-item rounded-0 d-flex align-items-center">
+              <li className="list-group-item rounded-0 d-flex align-items-center" onClick={() => setSelectedQuiz(quiz)}>
                 <FaRocket className="mx-2 green" />
                 <div className="assign pt-2">
                   <Link to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`} className="a-none-black">
@@ -139,8 +144,7 @@ const navigate = useNavigate();
                   </p>
                 </div>
                 <span className="ms-auto">
-                  <button className="btn btn-success py-0 px-1 me-1" onClick={() => navigate(`/Kanbas/Courses/${courseId}/Quizzes/`)}>Edit</button>
-                  <button className="btn btn-danger py-0 px-1 me-1">Delete</button>
+                  {/* <button className="btn btn-success py-0 px-1 me-1" onClick={() => navigate(`/Kanbas/Courses/${courseId}/Quizzes/`)}>Edit</button> */}
                   {pub}
                   <FaEllipsisV className="ms-2" />
                 </span>
