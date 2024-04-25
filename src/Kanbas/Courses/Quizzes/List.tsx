@@ -14,6 +14,7 @@ import { FaCheckCircle, FaPlusCircle, FaEllipsisV, FaPlus, FaRocket, FaSlash, Fa
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { CgUnavailable } from "react-icons/cg";
+import * as ac from "../../../Users/client";
 
 function QuizList() {
 const { courseId } = useParams();
@@ -56,13 +57,25 @@ const navigate = useNavigate();
     dispatch(updateQuiz({ ...selectedQuiz, published: !selectedQuiz.published }));
   };
 
+
+  const [profile, setProfile] = useState({ username: "", password: "", 
+  firstName: "", lastName: "", dob: "", email: "", role: "USER" });
+  const fetchProfile = async () => {
+  const account = await ac.profile();
+  setProfile(account);
+};
+
+useEffect(() => {
+  fetchProfile();
+}, []);
+
   return (
     <div>
       <div className='row flex-grow-1'>
       <div className="col-5 flex-grow-1">
                 <input id="Quiz" className="form-control w-50" placeholder="Search for Quizzes"/>
             </div>
-            <div className="col flex-grow-2">
+            {(profile.role === "FACULTY" || profile.role === "ADMIN") && <div className="col flex-grow-2">
               <span className="float-end">
                 <button type="button" className="btn btn-danger rounded mx-1" onClick={handleAddQuiz}><FaPlus/> Quiz</button>
                 <button type="button" className="btn btn-outline-dark rounded" style={{backgroundColor:"rgb(171, 168, 165)"}} data-bs-toggle="dropdown">
@@ -76,7 +89,7 @@ const navigate = useNavigate();
                         <li><Link className="dropdown-item" to="#">Sort</Link></li>
                     </ul>
             </span>
-            </div>
+            </div>}
         </div>
       {/* <ul className="list-group">
         {quizList.filter((quiz) => quiz.course === courseId).map((quiz) => (
