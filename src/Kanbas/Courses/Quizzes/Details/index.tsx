@@ -147,7 +147,7 @@ function QuizDetails() {
                         <span className='float-end fw-bold'>Time Limit</span>
                     </div>
                     <div className="col">
-                        <span>{quiz.timeLimit}</span>
+                        <span>{quiz.timeLimit} minutes</span>
                     </div>
                 </div>
                 <div className="row">
@@ -229,9 +229,9 @@ function QuizDetails() {
             <div className='col-2'><h6>Until</h6></div>
             </div>
 
-            <div className='row'>
+            <div className='row border-bottom py-2'>
             <div className='col-2'>{quiz.dueDate}</div>
-            <div className='col-2'>{quiz.assignmentGroup}</div>
+            <div className='col-2'>{quiz.For}</div>
             <div className='col-2'>{quiz.availableDate}</div>
             <div className='col-2'>{quiz.dueDate}</div>
             </div>

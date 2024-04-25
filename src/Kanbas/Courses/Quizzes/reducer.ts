@@ -9,9 +9,9 @@ const initialState = {
     }[],
     quiz: {
       title: "New Quiz",
-      dueDate: "2023-01-01",
+      dueDate: new Date().toISOString().split('T')[0],
       QuizType: 'Graded Quiz',
-      Points: 0,
+      points: 0,
       numOfQuestions: 0,
       questions: [],
       published: false,
