@@ -91,7 +91,7 @@ function QuizDetails() {
                     {profile.role === 'FACULTY' && (
                     <button className="btn btn-outline-dark ms-1" style={{backgroundColor:"lightgray"}}>Preview</button>)}
                     {profile.role === 'FACULTY' && (
-                    <button className="btn btn-outline-dark ms-1" style={{backgroundColor:"lightgray"}}><testvariable.FaPencilAlt/> Edit</button>)}
+                    <button className="btn btn-outline-dark ms-1" style={{backgroundColor:"lightgray"}} onClick={() => navigate(`/Kanbas/Courses/${courseId}/Quizzes/${quizId}/Editor`)}><testvariable.FaPencilAlt/> Edit</button>)}
                     <div className="dropdown" style={{display: "inline"}}>
                         <button type="button" className="btn btn-outline-dark rounded ms-1" style={{backgroundColor:"lightgray"}} data-bs-toggle="dropdown">
                             <testvariable.FaEllipsisV/>

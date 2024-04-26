@@ -31,6 +31,7 @@ const dispatch = useDispatch();
 const [selectedQuiz, setSelectedQuiz] = useState(quiz);
 const navigate = useNavigate();
 
+const randomId = new Date().getTime().toString();
   const handleDeleteQuiz = (quizId:String) => {
     client.deleteQuiz(quizId).then(() => {
       dispatch(deleteQuiz(quizId));
@@ -77,12 +78,12 @@ useEffect(() => {
             </div>
             {(profile.role === "FACULTY" || profile.role === "ADMIN") && <div className="col flex-grow-2">
               <span className="float-end">
-                <button type="button" className="btn btn-danger rounded mx-1" onClick={handleAddQuiz}><FaPlus/> Quiz</button>
+                <button type="button" className="btn btn-danger rounded mx-1" onClick={() => navigate(`/Kanbas/Courses/${courseId}/Quizzes/${randomId}/Editor`)}><FaPlus/> Quiz</button>
                 <button type="button" className="btn btn-outline-dark rounded" style={{backgroundColor:"rgb(171, 168, 165)"}} data-bs-toggle="dropdown">
                     <FaEllipsisV/>
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <li><Link className="dropdown-item" to="#">Edit</Link></li>
+                      <li><button className="dropdown-item" onClick={() => navigate(`/Kanbas/Courses/${courseId}/Quizzes/${selectedQuiz._id}/Editor`)}>Edit</button></li>
                       <li><button className="dropdown-item" onClick={() => handleDeleteQuiz(selectedQuiz._id)}>Delete</button></li>
                         <li><button className="dropdown-item" onClick={() => handlePublishQuiz(selectedQuiz._id)} >{selectedQuiz.published ? 'Unpublish' : 'Publish'}</button></li>
                         <li><Link className="dropdown-item" to="#">Copy</Link></li>
