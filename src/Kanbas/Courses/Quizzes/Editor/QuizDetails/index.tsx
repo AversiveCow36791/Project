@@ -32,10 +32,7 @@ function QuizDetailor () {
         requiredToViewQuizeResults: 'No',
         webCamRequired: 'No',
         lockQuestionsAfterAnswering: 'No',
-        due: '',
         for: '',
-        availableFrom: '',
-        untilDate: '',
         course: courseId,
         published: false,
     };
@@ -225,10 +222,10 @@ function QuizDetailor () {
                                 <div className="col p-1">
                                 <div className="row">
                                     <div className="col"><label htmlFor="Availability" className="form-label"><b>Available from</b></label>
-                                    <input type="date" id="Availability" className="form-control" value={quiz.availableDate} onChange={(e) => (setQuiz({...quiz,availableFromDate:e.target.value}))}/></div>
+                                    <input type="date" id="Availability" className="form-control" value={quiz.availableDate} onChange={(e) => (setQuiz({...quiz,availableDate:e.target.value}))}/></div>
                                 
                                     <div className="col"><label htmlFor="Until" className="form-label"><b>Until</b></label>
-                                    <input type="date" id="Until" className="form-control" value={quiz.untilDate} onChange={(e) => (setQuiz({...quiz,availableUntilDate:e.target.value}))}/></div>
+                                    <input type="date" id="Until" className="form-control" value={quiz.untilDate} onChange={(e) => (setQuiz({...quiz,untilDate:e.target.value}))}/></div>
                                 </div>
                                 </div>
                                     </div>
