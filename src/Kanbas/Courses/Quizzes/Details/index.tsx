@@ -46,7 +46,7 @@ function QuizDetails() {
         due: '',
         for: '',
         availableFrom: '',
-        until: '',
+        untilDate: '',
         course: courseId,
     };
 

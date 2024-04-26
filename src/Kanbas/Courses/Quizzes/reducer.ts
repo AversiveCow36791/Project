@@ -16,6 +16,7 @@ const initialState = {
       questions: [],
       published: false,
       course: '', // assuming course can be added here for context
+      untilDate: new Date().toISOString().split('T')[0],
     }, 
   };
 

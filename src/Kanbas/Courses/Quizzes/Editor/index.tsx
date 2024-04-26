@@ -5,15 +5,40 @@ import Nav from '../Nav';
 import { KanbasState } from '../../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { CgUnavailable } from "react-icons/cg";
+import QuizDetailor from './QuizDetails';
 
 function QuizEditor() {
     const { quizId } = useParams();
     const { courseId } = useParams();
     const quizList = useSelector((state: KanbasState) => state.quizzesReducer.quizzes);
-    const quiz = quizList.find((quiz) => quiz._id === quizId);
+    const initialState = {
+        title: 'New Quiz',
+        QuizType: '',
+        points: '',
+        assignmentGroup: '',
+        ShuffleAnswers: '',
+        timeLimit: '',
+        MultipleAttempts: '',
+        viewResponses: '',
+        ShowCorrectAnswers: '',
+        OneQuestionAtATime: '',
+        requireRespondusLockDownBrowser: '',
+        requiredToViewQuizeResults: '',
+        webCamRequired: '',
+        lockQuestionsAfterAnswering: '',
+        due: '',
+        for: '',
+        availableFrom: '',
+        untilDate: '',
+        course: courseId,
+        published: false,
+    };
+    const quizState = quizList.find((quiz) => quiz._id === quizId);
+    const [quiz, setQuiz] = useState(quizState || initialState);
     const dispatch = useDispatch();
 
     const buttonClass = quiz.published ? 'btn btn-success' : 'btn btn-danger';
+
 
     let publishedContent;
     if (quiz.published === true) {
@@ -22,7 +47,8 @@ function QuizEditor() {
           <testvariable.FaCheckCircle/> Published
         </>
       );
-    } else {
+    }
+     else {
       publishedContent = (
         <>
             <CgUnavailable/> Unpublished
@@ -55,6 +81,7 @@ function QuizEditor() {
         <div className="row py-1"><hr/></div>
 
         <Nav/>
+        <QuizDetailor/>
         </>)};
     
     export default QuizEditor;
