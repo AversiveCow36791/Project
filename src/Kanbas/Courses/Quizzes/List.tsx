@@ -134,10 +134,10 @@ useEffect(() => {
             if (date < quiz.availableDate) {
               status = `Not available until ${quiz.availableDate}`;
             }
-            if (quiz.availableDate <= date && date <= quiz.dueDate) {
+            if (quiz.availableDate <= date && date <= quiz.untilDate) {
                 status = "Available"
             }
-            if (date > quiz.dueDate) {
+            if (date > quiz.untilDate) {
                 status = "Closed"
             }
             console.log(status);

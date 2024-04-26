@@ -233,7 +233,7 @@ function QuizDetails() {
             <div className='col-2'>{quiz.dueDate}</div>
             <div className='col-2'>{quiz.For}</div>
             <div className='col-2'>{quiz.availableDate}</div>
-            <div className='col-2'>{quiz.dueDate}</div>
+            <div className='col-2'>{quiz.untilDate}</div>
             </div>
             </>
     );
