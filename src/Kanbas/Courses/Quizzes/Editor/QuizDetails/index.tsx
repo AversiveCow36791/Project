@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { KanbasState } from "../../../../store";
 import { useEffect,useState } from "react";
-import * as client from "../services";
+import * as client from "../../services"
 import { setQuizzes,
     setQuiz,
     addQuiz,
@@ -20,19 +20,18 @@ function QuizDetailor () {
     const { quizId } = useParams();
     const initialState = {
         title: 'New Quiz',
-        QuizType: '',
-        points: '',
-        assignmentGroup: '',
-        ShuffleAnswers: '',
-        timeLimit: '',
-        MultipleAttempts: '',
-        viewResponses: '',
-        ShowCorrectAnswers: '',
-        OneQuestionAtATime: '',
-        requireRespondusLockDownBrowser: '',
-        requiredToViewQuizeResults: '',
-        webCamRequired: '',
-        lockQuestionsAfterAnswering: '',
+        QuizType: 'Graded Quiz',
+        points: 0,
+        assignmentGroup: 'Assignments',
+        ShuffleAnswers: 'No',
+        timeLimit: 20,
+        MultipleAttempts: 'No',
+        ShowCorrectAnswers: 'Immediately',
+        OneQuestionAtATime: 'Yes',
+        requireRespondusLockDownBrowser: 'No',
+        requiredToViewQuizeResults: 'No',
+        webCamRequired: 'No',
+        lockQuestionsAfterAnswering: 'No',
         due: '',
         for: '',
         availableFrom: '',
@@ -47,17 +46,31 @@ function QuizDetailor () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // const handleSave = async () => {
-    //     if (quiz._id) {
-    //         await client.updateQuiz(quiz);
-    //         dispatch(updateQuiz(quiz));
-    //     } else {
-    //         await client.createQuiz(courseId, quiz);
-    //         dispatch(addQuiz(quiz));
-    //     }
-    //     navigate(`/courses/${courseId}/quizzes`);
-    // }
-        
+
+    const handleSave = async () => {
+        if (quiz._id) {
+            await client.updateQuiz(quiz);
+            dispatch(updateQuiz(quiz));
+        } else {
+            const newQuiz = await client.createQuiz(courseId,quiz);
+            dispatch(addQuiz(newQuiz));
+        }
+        navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
+    };
+
+
+
+    const handleSaveAndPublish = async () => {
+        if (quiz._id) {
+            await client.updateQuiz({...quiz, published: true});
+            dispatch(updateQuiz({...quiz, published: true}));
+        } else {
+            const newQuiz = await client.createQuiz(courseId,{...quiz, published: true});
+            dispatch(addQuiz(newQuiz));
+        }
+        navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
+    }
+
 
     const EditorComponent = () => (
         <div style={{ border: "1px solid black" }}>
@@ -223,6 +236,18 @@ function QuizDetailor () {
 
                     
             </form>
+
+            <div className="row mt-2">
+            <div className="col">
+                    <button className="btn btn-danger" onClick={() => navigate(`/Kanbas/Courses/${courseId}/Quizzes`)}>Cancel</button>
+                </div>
+                <div className="col">
+                    <button className="btn btn-primary" onClick={handleSave}>Save</button>
+                </div>
+                <div className="col">
+                    <button className="btn btn-warning" onClick={handleSaveAndPublish}>Save and Publish</button>
+                </div>
+            </div>
         </div>
     );
 }
